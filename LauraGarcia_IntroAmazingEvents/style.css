@@ -6,6 +6,12 @@
 main{
     min-height: 82vh;
 }
+.colorCheck{
+   background: aliceblue !important;
+}
+.colorMain{
+    background: linear-gradient(rgb(224, 224, 234),rgb(242, 224, 224))
+}
 .buttonNav{
     padding: 0.5rem;
     border-radius: 0.5rem;
@@ -20,6 +26,11 @@ main{
 .iconos{
     width: 20rem;
     height: 4.3rem;   
+}
+.icono{
+    width: 10px;
+    height: 1px;
+    object-fit: cover;
 }
 .colorIcono{
     color:white;
@@ -39,6 +50,11 @@ main{
 .size{
     height: 100rem;
     width: 5rem;
+    object-fit: cover;
+}
+.cardImage{
+    height: 13rem;
+   
     object-fit: cover;
 }
 .sizeLi{
@@ -97,8 +113,8 @@ footer{
 }
 @media(min-width: 320px) and (max-width: 1023px){
     .imgDetails{
-        height: 250px;
-        width: 250px;
+        height: 220px;
+        width: 220px;
         object-fit: cover;
     }
     .buttonNav{
@@ -107,6 +123,16 @@ footer{
     .buttonsNavSpace{
         width: auto;
         justify-content: flex-start;  
+    }
+    .fondDetails{
+        height: 30rem;
+        width: 20rem;
+        
+    }
+    footer{
+        height:18vh;
+        display: flex;
+        flex-direction: column;
     }
 }
 @media(min-width: 426px) and (max-width: 850px){
@@ -118,6 +144,11 @@ footer{
     }
     dl, dt, dd{
         font-size: small;
+    }
+    .fondDetails{
+        height: 30rem;
+        width: 50rem;
+        
     }
 
 }
