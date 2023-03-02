@@ -1,4 +1,4 @@
-const eventos=data.events[0];
+const listEvents=data.events;
 const $main = document.getElementById( "index" )
 function createCard( dataEvents ){
     return `<div class="card colorAliceBlue colorAqua mb-5 " style="width: 18rem;">
@@ -14,13 +14,13 @@ function createCard( dataEvents ){
   </div>` 
 }
 
-function paintCard( data, element ){
+function paintCard( events, element ){
     let template = ''
-    for( let d of data.events ){
-        template += createCard( d )
+    for( let event of events ){
+        template += createCard( event )
     }
     element.innerHTML = template
 }
 
-const allCards=paintCard(data,$main)
+const allCards=paintCard(listEvents,$main)
 
