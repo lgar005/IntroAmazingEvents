@@ -5,9 +5,9 @@ function createCard( dataEvents ){
     <img src="${dataEvents.image}" class="card-img-top cardImage" alt="music-concert">
     <div class="card-body ">
       <h5 class="card-title">${dataEvents.name}</h5>
-      <p class="card-text">${dataEvents.description}</p><br/>
+      <p class="card-text sizePCards">${dataEvents.description}</p><br/>
       <div class="d-flex justify-content-around" >
-        <p>Price: ${dataEvents.price}</p>
+        <p>Price: $${dataEvents.price}</p>
         <a href="./details.html" class="btn btn-info">See more</a>
       </div>
     </div>
