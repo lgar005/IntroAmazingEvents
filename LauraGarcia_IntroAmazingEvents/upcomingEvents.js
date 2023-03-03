@@ -22,7 +22,7 @@ function paintCard( events, element ){
     }
     element.innerHTML = template
 }
-function filtterUpcomingEvents(events){
+function filterUpcomingEvents(events){
     let listUpcomingEvents=[ ];
     for(let event of events){
         const dateEvent=new Date(event.date);
@@ -30,9 +30,8 @@ function filtterUpcomingEvents(events){
             listUpcomingEvents.push(event);
         }
     }
-    console.log(listUpcomingEvents);
     return listUpcomingEvents;
 }
 
-const allUpcomingEvents=filtterUpcomingEvents(listEvents);
+const allUpcomingEvents=filterUpcomingEvents(listEvents);
 const allCardsUpcomingEvents=paintCard(allUpcomingEvents,$main);

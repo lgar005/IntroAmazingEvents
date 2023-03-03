@@ -22,7 +22,7 @@ function paintCard( events, element ){
     }
     element.innerHTML = template
 }
-function filtterPastEvents(events){
+function filterPastEvents(events){
     let listPastEvents=[ ];
     for(let event of events){
         const dateEvent=new Date(event.date);
@@ -30,9 +30,8 @@ function filtterPastEvents(events){
             listPastEvents.push(event);
         }
     }
-    console.log(listPastEvents);
     return listPastEvents;
 }
 
-const allPastEvents=filtterPastEvents(listEvents);
+const allPastEvents=filterPastEvents(listEvents);
 const allCardsPastEvents=paintCard(allPastEvents,$main);
