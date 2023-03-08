@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="./images/logoAmazingEvents.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <header>
@@ -74,38 +74,14 @@
           </button>
         </div>
         <!--checkbox-->
-      <div class="navbar colorCheck bg-body-tertiary d-flex flex-lg-row justify-content-lg-around  mb-5">  
-        <div class="form-check form-check-inline">
-          <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox1" value="option1">
-          <label class="form-check-label" for="inlineCheckbox1">Food Fair</label>
+      <div class="navbar colorCheck bg-body-tertiary d-flex justify-content-lg-around  mb-5 ">  
+        <div class="colorCheck d-flex flex-lg-row justify-content-lg-around " id="checkBox">
+
         </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox2" value="option2">
-          <label class="form-check-label" for="inlineCheckbox2">Museum</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox3" value="option3">
-          <label class="form-check-label" for="inlineCheckbox3">Costume Party</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox4" value="option4">
-          <label class="form-check-label" for="inlineCheckbox4">Music Concert</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox5" value="option5">
-          <label class="form-check-label" for="inlineCheckbox5">Race</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox6" value="option6">
-          <label class="form-check-label" for="inlineCheckbox6">Book Exchange</label>
-        </div>
-         <div class="form-check form-check-inline">
-          <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox7" value="option7">
-          <label class="form-check-label" for="inlineCheckbox7"> Let's go to the cinema</label>
-        </div>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2 colorFuchsia" type="search" aria-label="Search">
-          <button class="btn btn-outline-info" type="submit">Search</button>
+  
+        <form class="d-flex" role="search" id="search-title">
+          <input class="form-control me-2 colorFuchsia" type="search" aria-label="Search" id="search-input">
+          <button class="btn btn-outline-info" type="submit" id="search">Search</button>
         </form>
       </div>
         <!--Cards-->
@@ -134,7 +110,7 @@
      <p class="letterWhite mt-4">cohort</p>
   </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="./data.js"></script>
-    <script src="./index.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>

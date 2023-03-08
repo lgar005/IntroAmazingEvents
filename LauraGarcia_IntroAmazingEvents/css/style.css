@@ -59,7 +59,7 @@ main{
 }
 .sizeLi{
     width: 18rem;
-    height: 3rem;
+    height: auto;
 }
 .fondoCarousel{
     color: black;
@@ -227,4 +227,17 @@ footer{
         justify-content: center !important;
     }
     
+}
+@media(min-width: 320px) and (max-width: 1023px){
+    .colorCheck{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+@media(min-width: 320px) and (max-width: 1440px){
+    .formC{
+        width: 30rem;
+        border-radius: 0.2rem;
+    }
 }
