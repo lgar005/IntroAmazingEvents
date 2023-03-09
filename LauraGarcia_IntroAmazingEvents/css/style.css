@@ -235,9 +235,15 @@ footer{
         align-items: flex-start;
     }
 }
-@media(min-width: 320px) and (max-width: 1440px){
+@media(min-width: 320px) and (max-width: 1423px){
     .formC{
         width: 30rem;
+        border-radius: 0.2rem;
+    }    
+}
+@media(min-width: 1424px) {
+    .formC{
+        width: 40rem;
         border-radius: 0.2rem;
     }
 }

@@ -29,14 +29,8 @@ function paintCard( events, element ){
 }
 
 function filterUpcomingEvents(events){
-    let listUpcomingEvents=[ ];
-    for(let event of events){
-        const dateEvent=new Date(event.date);
-        if(dateActual<dateEvent){
-            listUpcomingEvents.push(event);
-        }
-    }
-    return listUpcomingEvents;
+    let listUpcomingEventsFil=events.filter(eventT=> dateActual< new Date(eventT.date));
+    return listUpcomingEventsFil;
 }
 
 const allUpcomingEvents=filterUpcomingEvents(listEvents);
@@ -63,8 +57,7 @@ function filterCheckBox(events){
   if(selected.length===0){
     return events;
   }else{
-    return events.filter(eventT=>
-       selected.includes(eventT.category))
+    return events.filter(eventT=>selected.includes(eventT.category))
   }
 }
 
@@ -87,5 +80,5 @@ function filtroCruzado(listEvents){
 }
 
 function noMatch(){
-  return `<h5>there is no match with the search</h5>`
+  return `<h5 class="opacity">there is no match with the search</h5>`
 }

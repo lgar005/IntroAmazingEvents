@@ -28,14 +28,8 @@ function paintCard( events, element ){
     }
 }
 function filterPastEvents(events){
-    let listPastEvents=[ ];
-    for(let event of events){
-        const dateEvent=new Date(event.date);
-        if(dateActual>dateEvent){
-            listPastEvents.push(event);
-        }
-    }
-    return listPastEvents;
+    let listPastEventsFil=events.filter(eventT=> dateActual> new Date(eventT.date));
+    return listPastEventsFil;
 }
 
 const allPastEvents=filterPastEvents(listEvents);
