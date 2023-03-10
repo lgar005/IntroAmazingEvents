@@ -37,8 +37,7 @@ const checkB = listCategories.reduce( (acc, category, index) =>  acc += `<div cl
                                                                   <label class="form-check-label" for="inlineCheckbox${index}">${category}</label>
                                                                   </div>`, '' )
                                                                   $check.innerHTML+=checkB;  
-                                                                  const ul = document.querySelector('ul')
-
+                                                                
 $check.addEventListener('change',e=>{
   paintCard(filtroCruzado(listEvents),$main)
 })
