@@ -63,17 +63,11 @@ fetch(url)
             console.log("entre al then de la url")
             return response.json()
           }).then(datos=>{console.log("Datos")
-          console.log(datos)
-          console.log("eventos")
-          console.log(datos.events)
           const listEvents= datos.events;
           const dateActual=new Date(datos.currentDate);
-          console.log(dateActual)
           const allPastEvents=filterPastEvents(listEvents, dateActual);
-          console.log("eventos pasados "+allPastEvents);
           const allCardsPastEvents=paintCard(allPastEvents,$main);
           const listCategories=Array.from( new Set(listEvents.map(eventT=>eventT.category)));
-          console.log(listCategories);
           const checkB = listCategories.reduce( (acc, category, index) =>  acc += `<div class="form-check form-check-inline">
                                                                   <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox${index}" 
                                                                   value="${category}">

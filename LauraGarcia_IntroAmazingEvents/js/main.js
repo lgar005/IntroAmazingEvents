@@ -58,17 +58,11 @@ function noMatch(){
 const url='https://mindhub-xj03.onrender.com/api/amazing';
 fetch(url)
       .then(response=>{
-        console.log("entre al then de la url")
         return response.json()
       }).then(datos=>{
-        console.log("Datos")
-        console.log(datos)
-        console.log("eventos")
-        console.log(datos.events)
         const listEvents= datos.events;
         const allCards=paintCard(listEvents,$main);
         const listCategories=Array.from( new Set(listEvents.map(eventT=>eventT.category)));
-        console.log(listCategories);
         const checkB = listCategories.reduce( (acc, category, index) =>  acc += `<div class="form-check form-check-inline">
                                                                   <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox${index}" 
                                                                   value="${category}">

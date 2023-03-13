@@ -10,7 +10,7 @@ function createCard(eventT){
             <li>Category: ${eventT.category}</li>
             <li>Place: ${eventT.place}</li>
             <li>Capacity: ${eventT.capacity}</li>
-            <li>Estimate: ${eventT.estimate ? eventT.estimate: "It is not defined"}</li>
+            <li>${eventT.assistance ? 'Assistence: ' + eventT.assistance : 'Estimate: ' + eventT.estimate}</li>
             <li>price: $${eventT.price}</li>
         </ul>`
 }
