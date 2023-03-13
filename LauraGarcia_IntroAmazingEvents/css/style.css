@@ -112,6 +112,9 @@ main{
 .colorAliceBlue{
     background-color: aliceblue;
 }
+.table td, th {
+    text-align: center;
+    } 
 footer{
     height: 10vh;
     background-color:  rgb(38, 202, 213);

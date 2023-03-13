@@ -15,20 +15,13 @@ function filterUpcomingEvents(events, dateActual){
 const url='https://mindhub-xj03.onrender.com/api/amazing';
 fetch(url)
       .then(response=>{
-        console.log("entre al then de la url")
         return response.json()
       }).then(datos=>{
-        console.log("Datos")
-        console.log(datos)
-        console.log("eventos")
-        console.log(datos.events)
         const listEvents= datos.events;
         const listCategories=Array.from( new Set(listEvents.map(eventT=>eventT.category)));
-        console.log(listCategories);
         const dateActual=new Date(datos.currentDate);
         const allPastEvents=filterPastEvents(listEvents, dateActual);
         const allUpcomingEvents=filterUpcomingEvents(listEvents, dateActual);
-        console.log(dateActual)
         const eventAttendancePercentage=[];
         allPastEvents.forEach(eventT=>{
             eventAttendancePercentage.push({   
@@ -36,25 +29,9 @@ fetch(url)
                 percentage:(eventT.assistance*100)/eventT.capacity,
             })
         })
-        console.log("porcentajes"+eventAttendancePercentage)
-        for(let elementos of eventAttendancePercentage){
-            console.log(elementos);
-        }
         eventAttendancePercentage.sort((x,y)=>y.percentage-x.percentage)
-        console.log("despues")
-        for(let elementos of eventAttendancePercentage){
-            console.log(elementos);
-        }
         const eventLargeCapacity= allPastEvents.sort((x,y)=>y.capacity-x.capacity)
-        console.log("capacidad")
-        for(let elementos of eventLargeCapacity){
-            console.log(elementos);
-
-        }
         const infoFirstTable= [];
-        console.log(eventAttendancePercentage[0].nameEvent)
-        console.log(eventAttendancePercentage[eventAttendancePercentage.length-1].nameEvent)
-        console.log(eventLargeCapacity[0].name)
         infoFirstTable.push({
                             name1:eventAttendancePercentage[0].nameEvent, 
                             name2:eventAttendancePercentage[eventAttendancePercentage.length-1].nameEvent, 
@@ -133,37 +110,37 @@ fetch(url)
                     {
                         nameCategory: "Food",
                         revenuesTC: revenuesFoodPE,
-                        percentagePE: (assistanceFoodPE*100)/capacityFoodPE,
+                        percentagePE: parseFloat((assistanceFoodPE*100)/capacityFoodPE).toFixed(2),
                     },
                     {
                         nameCategory: "Museum",
                         revenuesTC: revenuesMuseumPE,
-                        percentagePE: (assistanceMuseumPE*100)/capacityMuseumPE,
+                        percentagePE: parseFloat((assistanceMuseumPE*100)/capacityMuseumPE).toFixed(2),
                     },
                     {
                         nameCategory: "Concert",
                         revenuesTC: revenuesConcertPE,
-                        percentagePE: (assistanceConcertPE*100)/capacityConcertPE,
+                        percentagePE: parseFloat((assistanceConcertPE*100)/capacityConcertPE).toFixed(2),
                     },
                     {
                         nameCategory: "Race",
                         revenuesTC: revenuesRacePE,
-                        percentagePE: (assistanceRacePE*100)/capacityRacePE,
+                        percentagePE: parseFloat((assistanceRacePE*100)/capacityRacePE).toFixed(2),
                     },
                     {
                         nameCategory: "Books",
                         revenuesTC: revenuesBooksPE,
-                        percentagePE: (assistanceBooksPE*100)/capacityBooksPE,
+                        percentagePE: parseFloat((assistanceBooksPE*100)/capacityBooksPE).toFixed(2),
                     },
                     {
                         nameCategory: "Cinema",
                         revenuesTC: revenuesCinemaPE,
-                        percentagePE: (assistanceCinemaPE*100)/capacityCinemaPE,
+                        percentagePE: parseFloat((assistanceCinemaPE*100)/capacityCinemaPE).toFixed(2),
                     },
                     {
                         nameCategory: "Party",
                         revenuesTC: revenuesPartyPE,
-                        percentagePE: (assistancePartyPE*100)/capacityPartyPE,
+                        percentagePE: parseFloat((assistancePartyPE*100)/capacityPartyPE).toFixed(2),
                     }
                 ]
     
@@ -171,10 +148,118 @@ fetch(url)
                                                                                     <tr>
                                                                                         <th>${eventT.nameCategory}</th>
                                                                                         <td>${eventT.revenuesTC}</td>
-                                                                                        <td>${eventT.percentagePE}</td>
+                                                                                        <td>${eventT.percentagePE}%</td>
                                                                                     </tr>
                                                                                     `
                                                                         ,'');
                                                                         $pStatics.innerHTML+=rowThirdTable;
+           //TABLA UPCOMING EVENTS                                                                
+           let estimateFoodUE=0;
+           let estimateMuseumUE=0;
+           let estimateConcertUE=0;
+           let estimateRaceUE=0;
+           let estimateBooksUE=0;
+           let estimateCinemaUE=0;
+           let estimatePartyUE=0;
+           let capacityFoodUE=0;
+           let capacityMuseumUE=0;
+           let capacityConcertUE=0;
+           let capacityRaceUE=0;
+           let capacityBooksUE=0;
+           let capacityCinemaUE=0;
+           let capacityPartyUE=0;
+           let revenuesFoodUE=0;
+           let revenuesMuseumUE=0;
+           let revenuesConcertUE=0;
+           let revenuesRaceUE=0;
+           let revenuesBooksUE=0;
+           let revenuesCinemaUE=0;
+           let revenuesPartyUE=0;
+           console.log("upc events")
+           allUpcomingEvents.map(up=> console.log(up))
+           allUpcomingEvents.forEach(eventT=>{
+                  if(eventT.category==="Food"){
+                       estimateFoodUE+=eventT.estimate;                    ;
+                       capacityFoodUE+=eventT.capacity;
+                       revenuesFoodUE+=eventT.estimate*eventT.price;
+                   }
+                   else if(eventT.category==='Museum'){
+                        estimateMuseumUE+=eventT.estimate;
+                       capacityMuseumUE+=eventT.capacity;
+                       revenuesMuseumUE+=eventT.estimate*eventT.price;
+                   }
+                   else if(eventT.category==='Concert'){
+                        estimateConcertUE+=eventT.estimate;
+                       capacityConcertUE+=eventT.capacity;
+                       revenuesConcertUE+=eventT.estimate*eventT.price;
+                   }
+                   else if(eventT.category==='Race'){
+                        estimateRaceUE+=eventT.estimate;
+                       capacityRaceUE+=eventT.capacity;
+                       revenuesRaceUE+=eventT.estimate*eventT.price
+                   }
+                   else if(eventT.category==='Books'){
+                        estimateBooksUE+=eventT.estimate;
+                       capacityBooksUE+=eventT.capacity;
+                       revenuesBooksUE+=eventT.estimate*eventT.price;
+                   }
+                   else if(eventT.category==='Cinema'){
+                        estimateCinemaUE+=eventT.estimate;
+                       capacityCinemaUE+=eventT.capacity;
+                       revenuesCinemaUE+=eventT.estimate*eventT.price;
+                   }
+                   else if(eventT.category==='Party'){
+                        estimatePartyUE+=eventT.estimate;
+                       capacityPartyUE+=eventT.capacity;
+                       revenuesPartyUE+=eventT.estimate*eventT.price;
+                   }
+               })
 
+               let infoUpcomingEventsStatics=[    
+                       {
+                           nameCategory: "Food",
+                           revenuesTC: revenuesFoodUE,
+                           percentageUE: parseFloat((estimateFoodUE*100)/capacityFoodUE).toFixed(2),
+                       },
+                       {
+                           nameCategory: "Museum",
+                           revenuesTC: revenuesMuseumUE,
+                           percentageUE: parseFloat((estimateMuseumUE*100)/capacityMuseumUE).toFixed(2),
+                       },
+                       {
+                           nameCategory: "Concert",
+                           revenuesTC: revenuesConcertUE,
+                           percentageUE: parseFloat((estimateConcertUE*100)/capacityConcertUE).toFixed(2),
+                       },
+                       {
+                           nameCategory: "Race",
+                           revenuesTC: revenuesRaceUE,
+                           percentageUE: parseFloat((estimateRaceUE*100)/capacityRaceUE).toFixed(2),
+                       },
+                       {
+                           nameCategory: "Books",
+                           revenuesTC: revenuesBooksUE,
+                           percentageUE: parseFloat((estimateBooksUE*100)/capacityBooksUE).toFixed(2),
+                       },
+                       {
+                           nameCategory: "Cinema",
+                           revenuesTC: revenuesCinemaUE,
+                           percentageUE:(estimateCinemaUE*100)/capacityCinemaUE,
+                       },
+                       {
+                           nameCategory: "Party",
+                           revenuesTC: revenuesPartyUE,
+                           percentageUE: parseFloat((estimatePartyUE*100)/capacityPartyUE).toFixed(2),
+                       }
+                   ]
+       
+               const rowSecondTable=infoUpcomingEventsStatics.reduce((acc, eventT)=>  acc += `
+                                                                                       <tr>
+                                                                                           <th>${eventT.nameCategory}</th>
+                                                                                           <td>${eventT.revenuesTC}</td>
+                                                                                           <td>${eventT.percentageUE ? eventT.percentageUE :"0"}%</td>
+                                                                                       </tr>
+                                                                                       `
+                                                                           ,'');
+                                                                           $uStatics.innerHTML+=rowSecondTable;        
     }).catch(err=>console.log("err"))
