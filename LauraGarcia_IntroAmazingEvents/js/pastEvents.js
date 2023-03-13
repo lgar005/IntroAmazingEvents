@@ -1,5 +1,5 @@
-const listEvents=data.events;
-const dateActual=new Date(data.currentDate);
+//const listEvents=data.events;
+//const dateActual=new Date(data.currentDate);
 const $check=document.getElementById("checkBox");
 const $main = document.getElementById( "pastEvents");
 const $search=document.getElementById("search-title");
@@ -27,26 +27,11 @@ function paintCard( events, element ){
       element.innerHTML = template
     }
 }
-function filterPastEvents(events){
+function filterPastEvents(events, dateActual){
     let listPastEventsFil=events.filter(eventT=> dateActual> new Date(eventT.date));
     return listPastEventsFil;
 }
 
-const allPastEvents=filterPastEvents(listEvents);
-const allCardsPastEvents=paintCard(allPastEvents,$main);
-
-
-const listCategories=Array.from( new Set(listEvents.map(eventT=>eventT.category)));
-console.log(listCategories);
-const checkB = listCategories.reduce( (acc, category, index) =>  acc += `<div class="form-check form-check-inline">
-                                                                  <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox${index}" 
-                                                                  value="${category}">
-                                                                  <label class="form-check-label" for="inlineCheckbox${index}">${category}</label>
-                                                                  </div>`, '' )                                                                
-                                                                  $check.innerHTML+=checkB;
-$check.addEventListener('change',e=>{
-  paintCard(filtroCruzado(allPastEvents),$main)
-})
 function filterCheckBox(events){
   let selected = []; 
   const checkBChecked = document.querySelectorAll( 'input[type="checkbox"]:checked' )
@@ -59,14 +44,7 @@ function filterCheckBox(events){
        selected.includes(eventT.category))
   }
 }
-console.log(filterCheckBox(allPastEvents));  
-$search.addEventListener("submit",(eventT)  => {
-  eventT.preventDefault();
-  console.log(eventT);
-  console.log($searchInput.value);
-  console.log(filtroSearch(allPastEvents));
-  paintCard(filtroCruzado(allPastEvents), $main);
-})                                                  
+
 function filtroSearch(events){
   let inputS=$searchInput.value.toLowerCase();
   return events.filter(eventT=> eventT.name.toLowerCase().includes(inputS));
@@ -76,4 +54,42 @@ function filtroCruzado(listEvents){
 }
 function noMatch(){
   return `<h5>there is no match with the search</h5>`
+
+
 }
+const url='https://mindhub-xj03.onrender.com/api/amazing';
+fetch(url)
+          .then(response=>{
+            console.log("entre al then de la url")
+            return response.json()
+          }).then(datos=>{console.log("Datos")
+          console.log(datos)
+          console.log("eventos")
+          console.log(datos.events)
+          const listEvents= datos.events;
+          const dateActual=new Date(datos.currentDate);
+          console.log(dateActual)
+          const allPastEvents=filterPastEvents(listEvents, dateActual);
+          console.log("eventos pasados "+allPastEvents);
+          const allCardsPastEvents=paintCard(allPastEvents,$main);
+          const listCategories=Array.from( new Set(listEvents.map(eventT=>eventT.category)));
+          console.log(listCategories);
+          const checkB = listCategories.reduce( (acc, category, index) =>  acc += `<div class="form-check form-check-inline">
+                                                                  <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox${index}" 
+                                                                  value="${category}">
+                                                                  <label class="form-check-label" for="inlineCheckbox${index}">${category}</label>
+                                                                  </div>`, '' )                                                                
+                                                                  $check.innerHTML+=checkB;
+          $check.addEventListener('change',e=>{
+          paintCard(filtroCruzado(allPastEvents),$main)
+          })                                                            
+          $search.addEventListener("submit",(eventT)  => {
+          eventT.preventDefault();
+          console.log(eventT);
+          console.log($searchInput.value);
+          console.log(filtroSearch(allPastEvents));
+          paintCard(filtroCruzado(allPastEvents), $main);                                                      
+        })
+        
+      })
+          .catch(err=> console.log("err"))

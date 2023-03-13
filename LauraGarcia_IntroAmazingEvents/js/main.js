@@ -1,4 +1,4 @@
-const listEvents=data.events;
+//const listEvents=data.events;
 const $main = document.getElementById( "index" );
 const $check=document.getElementById("checkBox");
 const $search=document.getElementById("search-title");
@@ -27,20 +27,8 @@ function paintCard( events, element ){
   }
 }
 
-const allCards=paintCard(listEvents,$main);
+//__________________________________________________________
 
-const listCategories=Array.from( new Set(listEvents.map(eventT=>eventT.category)));
-console.log(listCategories);
-const checkB = listCategories.reduce( (acc, category, index) =>  acc += `<div class="form-check form-check-inline">
-                                                                  <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox${index}" 
-                                                                  value="${category}">
-                                                                  <label class="form-check-label" for="inlineCheckbox${index}">${category}</label>
-                                                                  </div>`, '' )
-                                                                  $check.innerHTML+=checkB;  
-                                                                
-$check.addEventListener('change',e=>{
-  paintCard(filtroCruzado(listEvents),$main)
-})
 
 function filterCheckBox(events){
   let selected = []; 
@@ -53,14 +41,7 @@ function filterCheckBox(events){
     return events.filter(eventT=>selected.includes(eventT.category))
   }
 }
-console.log(filterCheckBox(listEvents));
-$search.addEventListener("submit",(eventT)  => {
-  eventT.preventDefault();
-  console.log(eventT);
-  console.log($searchInput.value);
-  console.log(filtroSearch(listEvents));
-  paintCard(filtroCruzado(listEvents), $main);
-})
+
 function filtroSearch(events){
   let inputS=$searchInput.value.toLowerCase();
   return events.filter(eventT=> eventT.name.toLowerCase().includes(inputS));
@@ -68,6 +49,42 @@ function filtroSearch(events){
 function filtroCruzado(listEvents){
   return filterCheckBox(filtroSearch(listEvents));
 }
+//__________________________________________________________
+
 function noMatch(){
   return `<h5>there is no match with the search</h5>`
 }
+
+const url='https://mindhub-xj03.onrender.com/api/amazing';
+fetch(url)
+      .then(response=>{
+        console.log("entre al then de la url")
+        return response.json()
+      }).then(datos=>{
+        console.log("Datos")
+        console.log(datos)
+        console.log("eventos")
+        console.log(datos.events)
+        const listEvents= datos.events;
+        const allCards=paintCard(listEvents,$main);
+        const listCategories=Array.from( new Set(listEvents.map(eventT=>eventT.category)));
+        console.log(listCategories);
+        const checkB = listCategories.reduce( (acc, category, index) =>  acc += `<div class="form-check form-check-inline">
+                                                                  <input class="form-check-input colorFuchsia" type="checkbox" id="inlineCheckbox${index}" 
+                                                                  value="${category}">
+                                                                  <label class="form-check-label" for="inlineCheckbox${index}">${category}</label>
+                                                                  </div>`, '' )
+                                                                  $check.innerHTML+=checkB;  
+        $check.addEventListener('change',e=>{
+          paintCard(filtroCruzado(listEvents),$main)
+        })                                                            
+        $search.addEventListener("submit",(eventT)  => {
+          eventT.preventDefault();
+          console.log(eventT);
+          console.log($searchInput.value);
+          console.log(filtroSearch(listEvents));
+          paintCard(filtroCruzado(listEvents), $main);
+        })                                                         
+
+      })
+        .catch(err=> console.log("err"))

@@ -1,10 +1,5 @@
-const listEvents=data.events;
+//const listEvents=data.events;
 const $main = document.getElementById( "eventInfo" );
-const params=new URLSearchParams(location.search);
-const id= params.get("id")
-console.log(id)
-let eventT=listEvents.find(element=>element._id===id);
-console.log(eventT);
 function createCard(eventT){
     return `<img class="imgDetails" src="${eventT.image}" alt="${eventT.name}">
          <div class="sizeInfoDetails">
@@ -24,5 +19,23 @@ function renderCard(eventT, element){
     template+=createCard(eventT);
     element.innerHTML=template;
 }
-
-renderCard(eventT, $main)
+const url='https://mindhub-xj03.onrender.com/api/amazing';
+fetch(url)
+      .then(response=>{
+        console.log("entre al then de la url")
+        return response.json()
+      }).then(datos=>{
+        console.log("Datos")
+        console.log(datos)
+        console.log("eventos")
+        console.log(datos.events)
+        const listEvents= datos.events;
+        const params=new URLSearchParams(location.search);
+        console.log("params "+params)
+        const id= params.get("id")
+        console.log(id)
+        const eventT=listEvents.find(event=>event._id.toString()===id);
+        console.log("event "+eventT);
+        renderCard(eventT, $main)
+      })
+    .catch(err=> console.log("err"))
